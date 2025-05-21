@@ -1,0 +1,188 @@
+---
+title: "Development actions history"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+All commands that you use to use when developing packages...
+
+# First time just after creating the project
+
+- Fill the following chunk to create the DESCRIPTION of your package
+
+```{r description}
+# Describe your package
+fusen::fill_description(
+  pkg = here::here(),
+  fields = list(
+    Title = "Compute nrow of dafaframe",
+    Description = "Compute nrow of the input dataframe and return a message (and the number of rows).",
+    `Authors@R` = c(
+      person("Maxence", "Ubertalli", email = "maxence.ubertalli@atih.sante.fr", role = c("aut", "cre"), comment = c(ORCID = "0000-0000-0000-0000"))
+    )
+  )
+)
+# Define License with use_*_license()
+usethis::use_mit_license("MU")
+```
+
+# All-in-one function to deploy publicly on GitHub
+
+Either use this GitHub all-in-one function or choose the steps one-by-one in the following sections.
+See `vignette("share-on-a-github-website", package = "fusen")` for more information.
+
+```{r, eval=FALSE}
+# _All-in-one share of your package and its documentation on GitHub
+fusen::init_share_on_github()
+```
+
+
+# Start using git
+
+```{r, eval=FALSE}
+usethis::use_git()
+# Deal with classical files to ignore
+usethis::git_vaccinate()
+# Use main for primary branch
+usethis::git_default_branch_rename()
+```
+
+# Set extra sources of documentation
+
+```{r, eval=FALSE}
+# Install a first time
+remotes::install_local()
+# README
+usethis::use_readme_rmd()
+# Code of Conduct
+usethis::use_code_of_conduct("contact@fake.com")
+# NEWS
+usethis::use_news_md()
+```
+
+**From now, you will need to "inflate" your package at least once to be able to use the following commands. Let's go to your flat template, and come back here later if/when needed.**
+
+
+# Package development tools
+## Use once
+
+```{r, eval=FALSE}
+# Pipe
+usethis::use_pipe()
+
+# package-level documentation
+usethis::use_package_doc()
+
+# GitHub
+# Add your credentials for GitHub
+usethis::create_github_token()
+gitcreds::gitcreds_set()
+
+# _Or one step at a time
+# Send your project to a new GitHub project (included in `init_share_on_github()`)
+usethis::use_github()
+
+# Set Continuous Integration
+# _GitHub (included in `init_share_on_github()`)
+usethis::use_github_action_check_standard()
+usethis::use_github_action("pkgdown")
+usethis::use_github_action("test-coverage")
+# _GitLab
+gitlabr::use_gitlab_ci(type = "check-coverage-pkgdown")
+```
+
+## Use everytime needed
+
+```{r, eval=FALSE}
+# Simulate package installation
+pkgload::load_all()
+
+# Generate documentation and deal with dependencies
+attachment::att_amend_desc()
+
+# Check the package
+devtools::check()
+
+# Add a new flat template
+fusen::add_flat_template("add")
+
+# Inflate all flat files at once
+fusen::inflate_all()
+
+# Package structure (add this in a dev/Readme.md file)
+fusen::draw_package_structure()
+```
+
+# Share the package
+
+```{r, eval=FALSE}
+# set and try pkgdown documentation website locally
+usethis::use_pkgdown()
+pkgdown::build_site()
+
+# build the tar.gz with vignettes to share with others
+devtools::build(vignettes = TRUE)
+
+# Share your package and its documentation on GitHub
+# usethis::create_github_token()
+# gitcreds::gitcreds_set()
+fusen::init_share_on_github()
+```
+
+```{r, eval=FALSE}
+#usethis::use_pkgdown()
+pkgdown::build_site(override = list(destination = "inst/site"))
+```
+
+```{r, eval=FALSE}
+usethis::use_readme_rmd()
+usethis::use_code_of_conduct("contact@fake.com")
+```
+
+```{r, eval=FALSE}
+usethis::use_news_md()
+usethis::use_version("major")
+usethis::use_version("patch")
+usethis::use_version("minor")
+usethis::use_dev_version()
+```
+
+# Code coverage
+
+```{r, eval=FALSE}
+covr::package_coverage()
+covr::report()
+```
+
+# mise à disposition données
+
+```{r, eval=FALSE}
+
+
+# generer la doc
+usethis::use_directory("data-raw", ignore = TRUE) 
+
+write.csv(x = data_demo_squirrels, file = './data-raw/data_demo_squirrels.csv')
+usethis::use_data_raw("data_demo_squirrels")
+
+checkhelper::use_data_doc("data_demo_squirrels", prefix = "doc_")
+attachment::att_amend_desc()
+
+devtools::check()
+```
+
+# 
+
+```{r, eval=FALSE}
+
+fusen::add_flat_template(
+  template = "additional",
+  flat_name = "export_results"
+)
+
+fusen::inflate(
+  flat_file = "dev/flat_export_results.Rmd",
+  vignette_name = "Exporter les résultats"
+)
+```

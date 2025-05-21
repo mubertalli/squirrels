@@ -1,0 +1,79 @@
+---
+title: "flat_get_info.Rmd"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+<!--
+ You need to run the 'description' chunk in the '0-dev_history.Rmd' file before continuing your code there.
+-->
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# get_df_nrows
+    
+```{r development-get_df_nrows}
+# You can prepare the code of the get_df_nrows() function here
+library(glue)
+
+df <- iris
+
+nrows_df <- nrow(df)
+
+message(glue('The df contains {nrows_df} rows'))
+
+```
+  
+```{r function-get_df_nrows}
+#' get_df_nrows 
+#' 
+#' Get a message with the number of rows in a dataframe
+#' 
+#' @param df DataFrame to work with
+#' @importFrom glue glue
+#' @return The number of rows in df
+#' @export
+#' @examples
+get_df_nrows <- function(df) {
+  nrows_df <- nrow(df)
+  message(glue('The dataset is composed of {nrows_df} observations'))
+  return(nrows_df)
+}
+```
+  
+```{r example-get_df_nrows}
+get_df_nrows(df = mtcars)
+```
+  
+```{r tests-get_df_nrows}
+test_that("get_df_nrows return correct number of rows in mtcars and iris data", {
+
+  expect_message(
+    object = get_df_nrows(df = mtcars),
+    regexp = "The dataset is composed of 32 observations"
+  )
+    expect_message(
+    object = get_df_nrows(df = iris),
+    regexp = "The dataset is composed of 150 observations"
+  )
+})
+
+```
+  
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in t2he console directly
+fusen::inflate(flat_file = "dev/flat_get_info.Rmd",
+               vignette_name = "Get info about the dataset")
+```
+
+
