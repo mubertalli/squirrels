@@ -186,3 +186,11 @@ fusen::inflate(
   vignette_name = "Exporter les résultats"
 )
 ```
+
+```{r, eval=FALSE}
+usethis::use_git_remote("origin",
+                        url = "https://github.com/mubertalli/squirrels.git",
+                        overwrite = TRUE)
+
+gert::git_push(remote = "origin")
+```
