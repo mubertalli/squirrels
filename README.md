@@ -7,7 +7,8 @@
 
 <!-- badges: end -->
 
-The goal of squirrels is to faire plein de trucs…
+The goal of squirrels is to faire plein de trucs… Et voilà une modif que
+je vais commiter
 
 ## Installation
 
