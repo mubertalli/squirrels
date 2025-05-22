@@ -3,5 +3,6 @@
 export(check_plus_in_primary_fur_color)
 export(check_presence_of_required_columns)
 export(get_df_nrows)
+export(save_as_csv)
 importFrom(glue,glue)
 importFrom(stringr,str_detect)
