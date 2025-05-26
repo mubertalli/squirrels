@@ -197,3 +197,23 @@ usethis::use_git_remote("origin",
 
 gert::git_push(remote = "origin")
 ```
+
+# fabrication vignette (A REVOIR marche pas)
+
+```{r, eval=FALSE}
+
+pkgbuild::build(vignettes = TRUE)
+remotes::install_local(build_vignettes = TRUE)
+browseVignettes("squirrels")
+```
+
+
+# globak variables (pour regrouper)
+```{r, eval=FALSE}
+checkhelper::print_globals(quiet = TRUE)
+
+# S'il y en a on peut générer le global.R par
+# usethis.... à voir plus loin
+```
+
+
