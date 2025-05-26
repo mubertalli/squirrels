@@ -18,7 +18,11 @@ le chemin de sortie
 Sauvegarde d'un df en csv
 }
 \examples{
-library(squirrels)
-library(readr)
-save_as_csv(df = data_demo_squirrels, './test.csv')
+mon_dossier_temp <- tempfile(pattern = "savecsv")
+dir.create(mon_dossier_temp)
+
+save_as_csv(df = iris, path = file.path(mon_dossier_temp, "output.csv"))
+
+unlink(mon_dossier_temp, recursive = TRUE)
+
 }

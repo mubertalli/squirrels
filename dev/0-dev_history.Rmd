@@ -180,7 +180,10 @@ fusen::add_flat_template(
   template = "additional",
   flat_name = "export_results"
 )
+```
 
+
+```{r, eval=FALSE}
 fusen::inflate(
   flat_file = "dev/flat_export_results.Rmd",
   vignette_name = "Exporter les résultats"
